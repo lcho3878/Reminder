@@ -13,11 +13,7 @@ final class TodoViewController: BaseViewController {
     
     private let realm = try! Realm()
     
-    private var list: Results<Todo>!{
-        didSet{
-            todoTableView.reloadData()
-        }
-    }
+    private var list: Results<Todo>!
     
     private func filterling(title: String) {
         switch title {
@@ -26,6 +22,7 @@ final class TodoViewController: BaseViewController {
         default:
             break
         }
+        todoTableView.reloadData()
     }
     
     private lazy var filterButton = {
@@ -103,6 +100,18 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
         let data = list[indexPath.row]
         cell.configureData(data)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let data = list[indexPath.row]
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { _,_,_ in
+            try! self.realm.write{
+                self.realm.delete(data)
+            }
+            self.todoTableView.reloadData()
+        }
+        let action = UISwipeActionsConfiguration(actions: [delete])
+        return action
     }
     
 }
