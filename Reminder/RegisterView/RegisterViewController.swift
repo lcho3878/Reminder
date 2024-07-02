@@ -143,7 +143,7 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
 extension RegisterViewController {
     @objc
     private func dismissButtonClicked() {
-        print(#function)
+        dismiss(animated: true)
     }
     
     @objc
