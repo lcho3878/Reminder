@@ -23,13 +23,15 @@ final class HomeViewController: BaseViewController {
         return bt
     }()
     
-    private let newTaskButton = {
+    private lazy var newTaskButton = {
         var configuration = UIButton.Configuration.borderless()
         configuration.title = "새로운 미리 알림"
         configuration.baseForegroundColor = .systemBlue
         configuration.image = UIImage(systemName: "plus.circle.fill")
         configuration.imagePadding = 8
-        let bt = UIButton(configuration: configuration)
+        let bt = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
+            self.newTaskButtonClicked()
+        }))
         return bt
     }()
     
@@ -71,6 +73,13 @@ final class HomeViewController: BaseViewController {
         }
     }
 
+}
 
+extension HomeViewController {
+    private func newTaskButtonClicked() {
+        let registerVC = RegisterViewController()
+        let registerNav = UINavigationController(rootViewController: registerVC)
+        present(registerNav, animated: true)
+    }
 }
 
