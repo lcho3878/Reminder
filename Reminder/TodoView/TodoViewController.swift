@@ -13,7 +13,38 @@ final class TodoViewController: BaseViewController {
     
     private let realm = try! Realm()
     
-    private var list: Results<Todo>!
+    private var list: Results<Todo>!{
+        didSet{
+            todoTableView.reloadData()
+        }
+    }
+    
+    private func filterling(title: String) {
+        switch title {
+        case "기본": list = realm.objects(Todo.self)
+        case "마감일": list = realm.objects(Todo.self).sorted(byKeyPath: "todoTitle", ascending: true)
+        default:
+            break
+        }
+    }
+    
+    private lazy var filterButton = {
+        let menus = [
+            UIAction(title: "기본") {
+                self.filterling(title: $0.title)
+            },
+            UIAction(title: "마감일") { 
+                self.filterling(title: $0.title)
+            },
+            UIAction(title: "제목") { _ in },
+            UIAction(title: "우선순위") { _ in },
+        
+        ]
+        let menu = UIMenu(title: "정렬", children: menus)
+        let view = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: nil, action: nil)
+        view.menu = menu
+        return view
+    }()
     
     private let categoryLabel = {
         let view = UILabel()
@@ -33,6 +64,7 @@ final class TodoViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
+        navigationItem.rightBarButtonItem = filterButton
     }
     
     override func configureHierarhy() {

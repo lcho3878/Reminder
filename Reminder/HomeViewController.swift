@@ -16,10 +16,12 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
-    private let tempButton = {
+    private lazy var tempButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.title = "임시버튼"
-        let bt = UIButton(configuration: configuration)
+        let bt = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
+            self.tempButtonClicked()
+        }))
         return bt
     }()
     
@@ -45,6 +47,11 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func configureView() {
+        super.configureView()
+        navigationItem.backButtonDisplayMode = .minimal
     }
     
     override func configureHierarhy() {
@@ -80,6 +87,11 @@ extension HomeViewController {
         let registerVC = RegisterViewController()
         let registerNav = UINavigationController(rootViewController: registerVC)
         present(registerNav, animated: true)
+    }
+    
+    private func tempButtonClicked() {
+        let todoVC = TodoViewController()
+        navigationController?.pushViewController(todoVC, animated: true)
     }
 }
 
