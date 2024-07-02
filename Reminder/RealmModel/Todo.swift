@@ -14,9 +14,8 @@ class Todo: Object {
     @Persisted var todoMemo: String?
     @Persisted var dueDate: Date?
     
-    convenience init(id: ObjectId, todoTitle: String, todoMemo: String?, dueDate: Date?) {
+    convenience init(todoTitle: String, todoMemo: String?, dueDate: Date?) {
         self.init()
-        self.id = id
         self.todoTitle = todoTitle
         self.todoMemo = todoMemo
         self.dueDate = dueDate
