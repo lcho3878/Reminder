@@ -18,6 +18,7 @@
 		5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD2C2C341A8800664E32 /* UIPaddingTextField.swift */; };
 		5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */; };
 		5421BD352C3423B200664E32 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5421BD342C3423B200664E32 /* RealmSwift */; };
+		5421BD392C34247400664E32 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD382C34247400664E32 /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		5421BD2A2C3412D600664E32 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5421BD2C2C341A8800664E32 /* UIPaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPaddingTextField.swift; sourceTree = "<group>"; };
 		5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		5421BD382C34247400664E32 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		5421BD372C34244500664E32 /* RealmModel */ = {
 			isa = PBXGroup;
 			children = (
+				5421BD382C34247400664E32 /* Todo.swift */,
 			);
 			path = RealmModel;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				5421BD152C340BED00664E32 /* HomeViewController.swift in Sources */,
 				5421BD2B2C3412D600664E32 /* RegisterViewController.swift in Sources */,
 				5421BD252C340C7B00664E32 /* BaseViewController.swift in Sources */,
+				5421BD392C34247400664E32 /* Todo.swift in Sources */,
 				5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */,
 				5421BD112C340BED00664E32 /* AppDelegate.swift in Sources */,
 				5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */,
