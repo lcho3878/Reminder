@@ -17,6 +17,7 @@
 		5421BD2B2C3412D600664E32 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD2A2C3412D600664E32 /* RegisterViewController.swift */; };
 		5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD2C2C341A8800664E32 /* UIPaddingTextField.swift */; };
 		5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */; };
+		5421BD352C3423B200664E32 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5421BD342C3423B200664E32 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5421BD352C3423B200664E32 /* RealmSwift in Frameworks */,
 				5421BD282C340E9F00664E32 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +114,7 @@
 			name = Reminder;
 			packageProductDependencies = (
 				5421BD272C340E9F00664E32 /* SnapKit */,
+				5421BD342C3423B200664E32 /* RealmSwift */,
 			);
 			productName = Reminder;
 			productReference = 5421BD0D2C340BED00664E32 /* Reminder.app */;
@@ -143,6 +146,7 @@
 			mainGroup = 5421BD042C340BED00664E32;
 			packageReferences = (
 				5421BD262C340E9F00664E32 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				5421BD332C3423B100664E32 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 5421BD0E2C340BED00664E32 /* Products */;
 			projectDirPath = "";
@@ -409,6 +413,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		5421BD332C3423B100664E32 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.52.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -416,6 +428,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5421BD262C340E9F00664E32 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		5421BD342C3423B200664E32 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5421BD332C3423B100664E32 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
