@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MenuTableViewCell: UITableViewCell {
+final class MenuTableViewCell: UITableViewCell {
     
     private let grayView = {
         let view = UIView()
