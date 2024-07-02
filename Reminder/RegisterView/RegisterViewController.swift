@@ -10,6 +10,16 @@ import SnapKit
 
 final class RegisterViewController: BaseViewController {
     
+    private lazy var dismissButton = {
+        let view = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(dismissButtonClicked))
+        return view
+    }()
+    
+    private lazy var addButton = {
+        let view = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addButtonClicked))
+        return view
+    }()
+    
     private let titleTextField = {
         let view = UIPaddingTextField()
         view.placeholder = "제목"
@@ -53,6 +63,8 @@ final class RegisterViewController: BaseViewController {
     override func configureView() {
         super.configureView()
         title = "새로운 할 일"
+        navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.rightBarButtonItem = addButton
     }
 
     override func configureHierarhy() {
@@ -120,4 +132,16 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
     
+}
+
+extension RegisterViewController {
+    @objc
+    private func dismissButtonClicked() {
+        print(#function)
+    }
+    
+    @objc
+    private func addButtonClicked() {
+        print(#function)
+    }
 }
