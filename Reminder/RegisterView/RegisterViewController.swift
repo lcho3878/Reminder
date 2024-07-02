@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 final class RegisterViewController: BaseViewController {
+    
+    private let realm = try! Realm()
     
     private lazy var dismissButton = {
         let view = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(dismissButtonClicked))
@@ -142,6 +145,11 @@ extension RegisterViewController {
     
     @objc
     private func addButtonClicked() {
-        print(#function)
+        guard let title = titleTextField.text else { return }
+        let todo = Todo(todoTitle: title, todoMemo: nil, dueDate: nil)
+        try! realm.write {
+            realm.add(todo)
+        }
+        dismiss(animated: true)
     }
 }
