@@ -60,13 +60,21 @@
 			children = (
 				5421BD102C340BED00664E32 /* AppDelegate.swift */,
 				5421BD122C340BED00664E32 /* SceneDelegate.swift */,
+				5421BD292C3412B200664E32 /* CustomView */,
 				5421BD142C340BED00664E32 /* HomeViewController.swift */,
-				5421BD242C340C7B00664E32 /* BaseViewController.swift */,
 				5421BD192C340BEE00664E32 /* Assets.xcassets */,
 				5421BD1B2C340BEE00664E32 /* LaunchScreen.storyboard */,
 				5421BD1E2C340BEE00664E32 /* Info.plist */,
 			);
 			path = Reminder;
+			sourceTree = "<group>";
+		};
+		5421BD292C3412B200664E32 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				5421BD242C340C7B00664E32 /* BaseViewController.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
