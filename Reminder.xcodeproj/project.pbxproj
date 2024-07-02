@@ -66,13 +66,12 @@
 		5421BD0F2C340BED00664E32 /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
-				5421BD102C340BED00664E32 /* AppDelegate.swift */,
-				5421BD122C340BED00664E32 /* SceneDelegate.swift */,
+				5421BD372C34244500664E32 /* RealmModel */,
+				5421BD362C34243100664E32 /* Resource */,
 				5421BD292C3412B200664E32 /* CustomView */,
 				5421BD142C340BED00664E32 /* HomeViewController.swift */,
 				5421BD302C341FAF00664E32 /* RegisterView */,
 				5421BD192C340BEE00664E32 /* Assets.xcassets */,
-				5421BD1B2C340BEE00664E32 /* LaunchScreen.storyboard */,
 				5421BD1E2C340BEE00664E32 /* Info.plist */,
 			);
 			path = Reminder;
@@ -94,6 +93,23 @@
 				5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */,
 			);
 			path = RegisterView;
+			sourceTree = "<group>";
+		};
+		5421BD362C34243100664E32 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5421BD102C340BED00664E32 /* AppDelegate.swift */,
+				5421BD122C340BED00664E32 /* SceneDelegate.swift */,
+				5421BD1B2C340BEE00664E32 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		5421BD372C34244500664E32 /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RealmModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
