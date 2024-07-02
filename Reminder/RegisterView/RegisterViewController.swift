@@ -20,10 +20,12 @@ final class RegisterViewController: BaseViewController {
     
     private lazy var addButton = {
         let view = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addButtonClicked))
+        view.isEnabled = false
+        view.tintColor = .lightGray
         return view
     }()
     
-    private let titleTextField = {
+    private lazy var titleTextField = {
         let view = UIPaddingTextField()
         view.placeholder = "제목"
         view.font = .systemFont(ofSize: 16)
@@ -32,6 +34,7 @@ final class RegisterViewController: BaseViewController {
         view.backgroundColor = .systemGray5
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.layer.cornerRadius = 8
+        view.addTarget(self, action: #selector(titleTextFieldChanged), for: .editingChanged)
         return view
     }()
     
@@ -151,5 +154,12 @@ extension RegisterViewController {
             realm.add(todo)
         }
         dismiss(animated: true)
+    }
+    
+    @objc
+    private func titleTextFieldChanged() {
+        guard let text = titleTextField.text else { return }
+        addButton.isEnabled = !text.isEmpty
+        addButton.tintColor = text.isEmpty ? .lightGray : .systemBlue
     }
 }
