@@ -16,6 +16,7 @@
 		5421BD282C340E9F00664E32 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5421BD272C340E9F00664E32 /* SnapKit */; };
 		5421BD2B2C3412D600664E32 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD2A2C3412D600664E32 /* RegisterViewController.swift */; };
 		5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD2C2C341A8800664E32 /* UIPaddingTextField.swift */; };
+		5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		5421BD242C340C7B00664E32 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5421BD2A2C3412D600664E32 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5421BD2C2C341A8800664E32 /* UIPaddingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPaddingTextField.swift; sourceTree = "<group>"; };
+		5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +68,7 @@
 				5421BD122C340BED00664E32 /* SceneDelegate.swift */,
 				5421BD292C3412B200664E32 /* CustomView */,
 				5421BD142C340BED00664E32 /* HomeViewController.swift */,
-				5421BD2A2C3412D600664E32 /* RegisterViewController.swift */,
+				5421BD302C341FAF00664E32 /* RegisterView */,
 				5421BD192C340BEE00664E32 /* Assets.xcassets */,
 				5421BD1B2C340BEE00664E32 /* LaunchScreen.storyboard */,
 				5421BD1E2C340BEE00664E32 /* Info.plist */,
@@ -81,6 +83,15 @@
 				5421BD2C2C341A8800664E32 /* UIPaddingTextField.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		5421BD302C341FAF00664E32 /* RegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				5421BD2A2C3412D600664E32 /* RegisterViewController.swift */,
+				5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */,
+			);
+			path = RegisterView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +175,7 @@
 				5421BD252C340C7B00664E32 /* BaseViewController.swift in Sources */,
 				5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */,
 				5421BD112C340BED00664E32 /* AppDelegate.swift in Sources */,
+				5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */,
 				5421BD132C340BED00664E32 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

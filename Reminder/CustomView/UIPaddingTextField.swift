@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UIPaddingTextField: UITextField {
+final class UIPaddingTextField: UITextField {
     
     var insetX: CGFloat = 0 {
         didSet {
