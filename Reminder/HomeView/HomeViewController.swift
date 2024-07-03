@@ -16,6 +16,18 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
+    private let listCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let n: CGFloat = 2
+        let spacing: CGFloat = 2
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = spacing
+        let width = (UIScreen.main.bounds.width - ((n + 1) * spacing)) / n
+        layout.itemSize = CGSize(width: width , height: 80)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return view
+    }()
+    
     private lazy var tempButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.title = "임시버튼"
@@ -47,6 +59,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
     }
     
     override func configureView() {
@@ -56,7 +69,8 @@ final class HomeViewController: BaseViewController {
     
     override func configureHierarhy() {
         view.addSubview(searchBar)
-        view.addSubview(tempButton)
+//        view.addSubview(tempButton)
+        view.addSubview(listCollectionView)
         view.addSubview(newTaskButton)
         view.addSubview(newListButton)
     }
@@ -67,9 +81,11 @@ final class HomeViewController: BaseViewController {
             $0.height.equalTo(44)
         }
         
-        tempButton.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
+
+        
+//        tempButton.snp.makeConstraints {
+//            $0.center.equalToSuperview()
+//        }
         
         newTaskButton.snp.makeConstraints {
             $0.leading.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -77,6 +93,12 @@ final class HomeViewController: BaseViewController {
         
         newListButton.snp.makeConstraints {
             $0.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        listCollectionView.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom).offset(8)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(newTaskButton.snp.top).offset(8)
         }
     }
 
@@ -93,5 +115,25 @@ extension HomeViewController {
         let todoVC = TodoViewController()
         navigationController?.pushViewController(todoVC, animated: true)
     }
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    private func configureCollectionView() {
+        listCollectionView.delegate = self
+        listCollectionView.dataSource = self
+        listCollectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    
 }
 
