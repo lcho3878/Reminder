@@ -8,7 +8,10 @@
 import UIKit
 import SnapKit
 
-final class MenuTableViewCell: UITableViewCell {
+final class MenuTableViewCell: UITableViewCell, Reusable {
+    static var identifier: String {
+        return String(describing: self)
+    }
     
     private let grayView = {
         let view = UIView()
@@ -52,9 +55,7 @@ final class MenuTableViewCell: UITableViewCell {
         return menuButton
     }()
     
-    static var identifier: String {
-        return String(describing: self)
-    }
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

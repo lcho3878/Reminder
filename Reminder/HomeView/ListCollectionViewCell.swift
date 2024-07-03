@@ -7,6 +7,11 @@
 
 import UIKit
 
-final class ListCollectionViewCell: UICollectionViewCell {
+final class ListCollectionViewCell: UICollectionViewCell, Reusable {
+    
+    static var identifier: String {
+        return String(describing: self)
+    }
+    
     
 }

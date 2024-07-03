@@ -88,7 +88,7 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
     private func configureTableView() {
         todoTableView.delegate = self
         todoTableView.dataSource = self
-        todoTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.id)
+        todoTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.identifier)
         todoTableView.rowHeight = UITableView.automaticDimension
     }
     
@@ -97,7 +97,7 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.id, for: indexPath) as? TodoTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.identifier, for: indexPath) as? TodoTableViewCell else { return UITableViewCell() }
         let data = list[indexPath.row]
         cell.configureData(data)
         return cell

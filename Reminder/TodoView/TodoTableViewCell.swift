@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-final class TodoTableViewCell: UITableViewCell {
+final class TodoTableViewCell: UITableViewCell, Reusable {
     
-    static var id: String {
+    static var identifier: String {
         return String(describing: self)
     }
     
