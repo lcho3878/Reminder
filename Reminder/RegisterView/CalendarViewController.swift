@@ -23,6 +23,11 @@ final class CalendarViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["date": datePicker.date])
+    }
+    
     override func configureView() {
         super.configureView()
     }

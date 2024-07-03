@@ -13,6 +13,8 @@ final class RegisterViewController: BaseViewController {
     
     private let realm = try! Realm()
     
+    private var todo = Todo(todoTitle: "", todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
+    
     private lazy var dismissButton = {
         let view = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(dismissButtonClicked))
         return view
@@ -64,6 +66,17 @@ final class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        NotificationCenter.default.addObserver(self, selector: #selector(todoReceived), name: NSNotification.Name("TodoReceived"), object: nil)
+    }
+    
+    @objc func todoReceived(notification: NSNotification) {
+        if let date = notification.userInfo?["date"] as? Date {
+            todo.dueDate = date
+        }
+        if let tag = notification.userInfo?["tag"] as? String {
+            todo.tag = tag
+        }
+        menuTableView.reloadData()
     }
     
     override func configureView() {
@@ -129,8 +142,21 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
-        let data = MenuList.allCases[indexPath.row].rawValue
-        cell.configureData(data)
+        let data = MenuList.allCases[indexPath.row]
+        var tail: String? {
+            switch data {
+            case .date:
+                return todo.dueDate?.formatted()
+            case .tag:
+                guard let tag = todo.tag, !tag.isEmpty else { return nil }
+                return todo.tag
+            case .priority:
+                return nil
+            case .image:
+                return nil
+            }
+        }
+        cell.configureData("\(data.rawValue): \(tail ?? "")")
         return cell
     }
     
