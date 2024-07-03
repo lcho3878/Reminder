@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 final class ListCollectionViewCell: UICollectionViewCell, Reusable {
     
@@ -79,6 +80,10 @@ final class ListCollectionViewCell: UICollectionViewCell, Reusable {
             $0.centerY.equalTo(iconImageView)
         }
         
+    }
+    
+    func configureData(_ data: Results<Todo>) {
+        countLabel.text = "\(data.count)"
     }
     
 }

@@ -28,15 +28,6 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
-    private lazy var tempButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.title = "임시버튼"
-        let bt = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
-            self.tempButtonClicked()
-        }))
-        return bt
-    }()
-    
     private lazy var newTaskButton = {
         var configuration = UIButton.Configuration.borderless()
         configuration.title = "새로운 미리 알림"
@@ -69,7 +60,6 @@ final class HomeViewController: BaseViewController {
     
     override func configureHierarhy() {
         view.addSubview(searchBar)
-//        view.addSubview(tempButton)
         view.addSubview(listCollectionView)
         view.addSubview(newTaskButton)
         view.addSubview(newListButton)
@@ -80,12 +70,6 @@ final class HomeViewController: BaseViewController {
             $0.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(44)
         }
-        
-
-        
-//        tempButton.snp.makeConstraints {
-//            $0.center.equalToSuperview()
-//        }
         
         newTaskButton.snp.makeConstraints {
             $0.leading.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -110,11 +94,6 @@ extension HomeViewController {
         let registerNav = UINavigationController(rootViewController: registerVC)
         present(registerNav, animated: true)
     }
-    
-    private func tempButtonClicked() {
-        let todoVC = TodoViewController()
-        navigationController?.pushViewController(todoVC, animated: true)
-    }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -131,9 +110,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
+        let data = Todo.makeList()
+        cell.configureData(data)
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let todoVC = TodoViewController()
+        navigationController?.pushViewController(todoVC, animated: true)
+    }
     
 }
 

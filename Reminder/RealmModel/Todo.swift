@@ -63,4 +63,9 @@ class Todo: Object {
         self.priority = priority
         self.tag = tag
     }
+    
+    static func makeList() -> Results<Todo> {
+        let realm = try! Realm()
+        return realm.objects(Todo.self)
+    }
 }
