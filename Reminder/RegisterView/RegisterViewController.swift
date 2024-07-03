@@ -123,12 +123,7 @@ final class RegisterViewController: BaseViewController {
 
 extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
     
-    enum MenuList: String, CaseIterable{
-        case date = "마감일"
-        case tag = "태그"
-        case priority = "우선 순위"
-        case image = "이미지 추가"
-    }
+    typealias MenuList = Todo.MenuList
     
     private func configureTableView() {
         menuTableView.delegate = self
@@ -142,21 +137,9 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
-        let data = MenuList.allCases[indexPath.row]
-        var tail: String? {
-            switch data {
-            case .date:
-                return todo.dueDate?.formatted()
-            case .tag:
-                guard let tag = todo.tag, !tag.isEmpty else { return nil }
-                return todo.tag
-            case .priority:
-                return nil
-            case .image:
-                return nil
-            }
-        }
-        cell.configureData("\(data.rawValue): \(tail ?? "")")
+        let menuType = MenuList.allCases[indexPath.row]
+        let data = todo.menuCellTitle(menuType: menuType)
+        cell.configureData(data)
         return cell
     }
     
@@ -192,7 +175,7 @@ extension RegisterViewController {
     @objc
     private func addButtonClicked() {
         guard let title = titleTextField.text else { return }
-        let todo = Todo(todoTitle: title, todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
+        todo.todoTitle = title
         try! realm.write {
             realm.add(todo)
         }
