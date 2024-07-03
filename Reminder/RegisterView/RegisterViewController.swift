@@ -134,6 +134,21 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = MenuList.allCases[indexPath.row]
+        switch data {
+        case .date:
+            let calVC = CalendarViewController()
+            navigationController?.pushViewController(calVC, animated: true)
+        case .tag:
+            print(data.rawValue)
+        case .priority:
+            print(data.rawValue)
+        case .image:
+            print(data.rawValue)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
