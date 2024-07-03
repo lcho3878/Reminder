@@ -29,6 +29,29 @@ final class MenuTableViewCell: UITableViewCell {
         return view
     }()
     
+    private lazy var menuButton = {
+        let menuButton = UIButton()
+        let menus = [
+            UIAction(title: "없음") { _ in
+                NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["priority": 0])
+            },
+            UIAction(title: "낮음") { _ in
+                NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["priority": 1])
+            },
+            UIAction(title: "중간") { _ in
+                NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["priority": 2])
+            },
+            UIAction(title: "높음") { _ in
+                NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["priority": 3])
+            },
+        
+        ]
+        let menu = UIMenu(title: "우선순위", children: menus)
+        menuButton.menu = menu
+        menuButton.showsMenuAsPrimaryAction = true
+        return menuButton
+    }()
+    
     static var identifier: String {
         return String(describing: self)
     }
@@ -47,6 +70,7 @@ final class MenuTableViewCell: UITableViewCell {
         contentView.addSubview(grayView)
         grayView.addSubview(menuLabel)
         grayView.addSubview(disclosureImageView)
+        grayView.addSubview(menuButton)
     }
     
     private func configureLayout() {
@@ -65,10 +89,17 @@ final class MenuTableViewCell: UITableViewCell {
             $0.size.equalTo(14)
             $0.trailing.equalTo(grayView).inset(12)
         }
+        
+        menuButton.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+
+    
+    func configureData(_ title: String, menuType: Todo.MenuList) {
+        menuLabel.text = title
+        menuButton.isHidden = menuType != .priority
     }
     
-    func configureData(_ title: String) {
-        menuLabel.text = title
-    }
     
 }

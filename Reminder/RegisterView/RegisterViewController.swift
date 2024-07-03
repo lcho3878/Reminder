@@ -76,6 +76,9 @@ final class RegisterViewController: BaseViewController {
         if let tag = notification.userInfo?["tag"] as? String {
             todo.tag = tag
         }
+        if let priority = notification.userInfo?["priority"] as? Int {
+            todo.priority = priority
+        }
         menuTableView.reloadData()
     }
     
@@ -139,13 +142,13 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
         let menuType = MenuList.allCases[indexPath.row]
         let data = todo.menuCellTitle(menuType: menuType)
-        cell.configureData(data)
+        cell.configureData(data, menuType: menuType)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = MenuList.allCases[indexPath.row]
-        switch data {
+        let menuType = MenuList.allCases[indexPath.row]
+        switch menuType {
         case .date:
             let calVC = CalendarViewController()
             navigationController?.pushViewController(calVC, animated: true)
@@ -153,13 +156,11 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
             let tagVC = TagViewController()
             let tagNav = UINavigationController(rootViewController: tagVC)
             present(tagNav, animated: true)
-        case .priority:
-            print(data.rawValue)
-        case .image:
-            print(data.rawValue)
+        case .priority, .image:
+            break
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }

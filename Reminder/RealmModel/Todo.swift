@@ -23,6 +23,15 @@ class Todo: Object {
     @Persisted var priority: Int
     @Persisted var tag: String?
     
+    var priorityString: String {
+        switch priority{
+        case 1: return ": 낮음"
+        case 2: return ": 중간"
+        case 3: return ": 높음"
+        default: return ""
+        }
+    }
+    
     func menuCellTitle(menuType: MenuList) -> String {
         switch menuType {
         case .date:
@@ -40,7 +49,7 @@ class Todo: Object {
                 return menuType.rawValue
             }
         case .priority:
-            return menuType.rawValue
+            return menuType.rawValue + priorityString
         case .image:
             return menuType.rawValue
         }
