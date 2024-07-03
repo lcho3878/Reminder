@@ -89,6 +89,7 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
         todoTableView.delegate = self
         todoTableView.dataSource = self
         todoTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.id)
+        todoTableView.rowHeight = UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
