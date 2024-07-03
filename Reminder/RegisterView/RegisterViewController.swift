@@ -164,7 +164,7 @@ extension RegisterViewController {
     @objc
     private func addButtonClicked() {
         guard let title = titleTextField.text else { return }
-        let todo = Todo(todoTitle: title, todoMemo: nil, dueDate: nil)
+        let todo = Todo(todoTitle: title, todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
         try! realm.write {
             realm.add(todo)
         }
