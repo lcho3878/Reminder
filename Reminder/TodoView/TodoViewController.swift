@@ -103,6 +103,15 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = list[indexPath.row]
+        let registerVC = RegisterViewController()
+        registerVC.todo = data
+        registerVC.viewType = .modify
+        let registerNav = UINavigationController(rootViewController: registerVC)
+        present(registerNav, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let data = list[indexPath.row]
         let delete = UIContextualAction(style: .destructive, title: "삭제") { _,_,_ in

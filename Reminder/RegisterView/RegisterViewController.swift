@@ -13,23 +13,26 @@ final class RegisterViewController: BaseViewController {
     
     private let realm = try! Realm()
     
-    private var todo = Todo(todoTitle: "", todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
+    var viewType: ViewType!
+    
+    var todo = Todo(todoTitle: "", todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
     
     private lazy var dismissButton = {
         let view = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(dismissButtonClicked))
         return view
     }()
     
-    private lazy var addButton = {
-        let view = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addButtonClicked))
-        view.isEnabled = false
-        view.tintColor = .lightGray
+    private lazy var rightBarButton = {
+        let view = UIBarButtonItem(title: viewType.rawValue, style: .plain, target: self, action: #selector(addButtonClicked))
+        view.isEnabled = viewType == .modify
+        view.tintColor = viewType == .modify ? .systemBlue : .lightGray
         return view
     }()
     
     private lazy var titleTextField = {
         let view = UIPaddingTextField()
         view.placeholder = "제목"
+        view.text = viewType == .modify ? todo.todoTitle : nil
         view.font = .systemFont(ofSize: 16)
         view.insetX = 8
         view.insetY = 8
@@ -46,8 +49,9 @@ final class RegisterViewController: BaseViewController {
         return view
     }()
     
-    private let contentTextView = {
+    private lazy var contentTextView = {
         let view = UITextView()
+        view.text = viewType == .modify ? todo.todoMemo : nil
         view.font = .systemFont(ofSize: 16)
         view.textContainerInset = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
         view.backgroundColor = .systemGray5
@@ -66,7 +70,17 @@ final class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        configureEnable()
         NotificationCenter.default.addObserver(self, selector: #selector(todoReceived), name: NSNotification.Name("TodoReceived"), object: nil)
+    }
+    
+    private func configureEnable() {
+        if viewType == .modify {
+            titleTextField.isEnabled = false
+            contentTextView.isEditable = false
+            menuTableView.isUserInteractionEnabled = false
+            rightBarButton.isHidden = true
+        }
     }
     
     @objc func todoReceived(notification: NSNotification) {
@@ -86,7 +100,7 @@ final class RegisterViewController: BaseViewController {
         super.configureView()
         title = "새로운 할 일"
         navigationItem.leftBarButtonItem = dismissButton
-        navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItem = rightBarButton
     }
 
     override func configureHierarhy() {
@@ -176,17 +190,24 @@ extension RegisterViewController {
     @objc
     private func addButtonClicked() {
         guard let title = titleTextField.text else { return }
-        todo.todoTitle = title
-        try! realm.write {
-            realm.add(todo)
-        }
+//        todo.todoTitle = title
+//        try! realm.write {
+//            realm.add(todo)
+//        }
         dismiss(animated: true)
     }
     
     @objc
     private func titleTextFieldChanged() {
         guard let text = titleTextField.text else { return }
-        addButton.isEnabled = !text.isEmpty
-        addButton.tintColor = text.isEmpty ? .lightGray : .systemBlue
+        rightBarButton.isEnabled = !text.isEmpty
+        rightBarButton.tintColor = text.isEmpty ? .lightGray : .systemBlue
+    }
+}
+
+extension RegisterViewController {
+    enum ViewType: String {
+        case register = "추가"
+        case modify = "수정"
     }
 }

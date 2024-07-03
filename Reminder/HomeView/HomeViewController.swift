@@ -91,6 +91,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController {
     private func newTaskButtonClicked() {
         let registerVC = RegisterViewController()
+        registerVC.viewType = .register
         let registerNav = UINavigationController(rootViewController: registerVC)
         present(registerNav, animated: true)
     }
