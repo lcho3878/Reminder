@@ -13,11 +13,15 @@ class Todo: Object {
     @Persisted(indexed: true) var todoTitle: String
     @Persisted var todoMemo: String?
     @Persisted var dueDate: Date?
+    @Persisted var priority: Int
+    @Persisted var tag: String?
     
-    convenience init(todoTitle: String, todoMemo: String?, dueDate: Date?) {
+    convenience init(todoTitle: String, todoMemo: String?, dueDate: Date?, priority: Int, tag: String?) {
         self.init()
         self.todoTitle = todoTitle
         self.todoMemo = todoMemo
         self.dueDate = dueDate
+        self.priority = priority
+        self.tag = tag
     }
 }
