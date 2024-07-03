@@ -141,7 +141,9 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
             let calVC = CalendarViewController()
             navigationController?.pushViewController(calVC, animated: true)
         case .tag:
-            print(data.rawValue)
+            let tagVC = TagViewController()
+            let tagNav = UINavigationController(rootViewController: tagVC)
+            present(tagNav, animated: true)
         case .priority:
             print(data.rawValue)
         case .image:

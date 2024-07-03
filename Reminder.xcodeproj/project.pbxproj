@@ -22,6 +22,7 @@
 		5421BD3B2C342E6F00664E32 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD3A2C342E6F00664E32 /* TodoViewController.swift */; };
 		5421BD3E2C3431DF00664E32 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */; };
 		5491951A2C35351A00C28B31 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195192C35351A00C28B31 /* CalendarViewController.swift */; };
+		5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491951B2C353CCC00C28B31 /* TagViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		5421BD3A2C342E6F00664E32 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		549195192C35351A00C28B31 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		5491951B2C353CCC00C28B31 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				5421BD2A2C3412D600664E32 /* RegisterViewController.swift */,
 				5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */,
 				549195192C35351A00C28B31 /* CalendarViewController.swift */,
+				5491951B2C353CCC00C28B31 /* TagViewController.swift */,
 			);
 			path = RegisterView;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				5421BD392C34247400664E32 /* Todo.swift in Sources */,
 				5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */,
 				5421BD112C340BED00664E32 /* AppDelegate.swift in Sources */,
+				5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */,
 				5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */,
 				5421BD132C340BED00664E32 /* SceneDelegate.swift in Sources */,
 			);
