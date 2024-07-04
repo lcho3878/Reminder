@@ -15,7 +15,9 @@ final class RegisterViewController: BaseViewController {
     
     var viewType: ViewType!
     
-    var todo = Todo(todoTitle: "", todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
+    let todo = Todo(todoTitle: "", todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
+    
+    var tempData: Todo?
     
     private lazy var dismissButton = {
         let view = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(dismissButtonClicked))
@@ -32,7 +34,7 @@ final class RegisterViewController: BaseViewController {
     private lazy var titleTextField = {
         let view = UIPaddingTextField()
         view.placeholder = "제목"
-        view.text = viewType == .modify ? todo.todoTitle : nil
+        view.text = viewType == .modify ? tempData?.todoTitle : nil
         view.font = .systemFont(ofSize: 16)
         view.insetX = 8
         view.insetY = 8
@@ -51,7 +53,7 @@ final class RegisterViewController: BaseViewController {
     
     private lazy var contentTextView = {
         let view = UITextView()
-        view.text = viewType == .modify ? todo.todoMemo : nil
+        view.text = viewType == .modify ? tempData?.todoMemo : nil
         view.font = .systemFont(ofSize: 16)
         view.textContainerInset = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
         view.backgroundColor = .systemGray5
@@ -70,16 +72,18 @@ final class RegisterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        configureEnable()
+        configureTempData(tempData)
+
         NotificationCenter.default.addObserver(self, selector: #selector(todoReceived), name: NSNotification.Name("TodoReceived"), object: nil)
     }
     
-    private func configureEnable() {
-        if viewType == .modify {
-            titleTextField.isEnabled = false
-            contentTextView.isEditable = false
-            menuTableView.isUserInteractionEnabled = false
-            rightBarButton.isHidden = true
+    private func configureTempData(_ tempData: Todo?) {
+        if let tempData {
+            todo.todoTitle = tempData.todoTitle
+            todo.todoMemo = tempData.todoMemo
+            todo.dueDate = tempData.dueDate
+            todo.priority = tempData.priority
+            todo.tag = tempData.tag
         }
     }
     
@@ -189,11 +193,24 @@ extension RegisterViewController {
     
     @objc
     private func addButtonClicked() {
-        guard let title = titleTextField.text else { return }
-//        todo.todoTitle = title
-//        try! realm.write {
-//            realm.add(todo)
-//        }
+        guard let title = titleTextField.text,
+              let memo = contentTextView.text else { return }
+        todo.todoTitle = title
+        todo.todoMemo = memo
+        if viewType == .register {
+            try! realm.write {
+                realm.add(todo)
+            }
+        }
+        else {
+            try! realm.write {
+                tempData?.todoTitle = todo.todoTitle
+                tempData?.todoMemo = todo.todoMemo
+                tempData?.dueDate = todo.dueDate
+                tempData?.priority = todo.priority
+                tempData?.tag = todo.tag
+            }
+        }
         dismiss(animated: true)
     }
     
