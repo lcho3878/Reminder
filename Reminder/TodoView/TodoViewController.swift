@@ -17,26 +17,23 @@ final class TodoViewController: BaseViewController {
     
     var list: Results<Todo>!
     
-    private func filterling(title: String) {
-        switch title {
-        default:
+    private func filterling(type: FilterType) {
+        list = TodoRepository.shared.readItems(with: with)
+        switch type {
+        case .basic:
             break
+        case .duedate, .priority, .title:
+            list = list.sorted(byKeyPath: type.keyPath, ascending: type.ascending)
         }
         todoTableView.reloadData()
     }
     
     private lazy var filterButton = {
-        let menus = [
-            UIAction(title: "기본") {
-                self.filterling(title: $0.title)
-            },
-            UIAction(title: "마감일") { 
-                self.filterling(title: $0.title)
-            },
-            UIAction(title: "제목") { _ in },
-            UIAction(title: "우선순위") { _ in },
-        
-        ]
+        let menus = FilterType.allCases.map { type in
+            UIAction(title: type.rawValue) { _ in
+                self.filterling(type: type)
+            }
+        }
         let menu = UIMenu(title: "정렬", children: menus)
         let view = UIBarButtonItem(image: UIImage(systemName: "star"), style: .plain, target: nil, action: nil)
         view.menu = menu
@@ -58,7 +55,7 @@ final class TodoViewController: BaseViewController {
         configureTableView()
         list = TodoRepository.shared.readItems(with: with)
         NotificationCenter.default.addObserver(self, selector: #selector(todoUpdated), name: NSNotification.Name("todoUpdated"), object: nil)
-        print(realm.configuration.fileURL)
+//        print(realm.configuration.fileURL)
     }
     
     override func configureView() {
@@ -133,5 +130,36 @@ extension TodoViewController {
     @objc
     private func todoUpdated() {
         todoTableView.reloadData()
+    }
+}
+
+extension TodoViewController {
+    enum FilterType: String, CaseIterable {
+        case basic = "기본"
+        case duedate = "마감일"
+        case title = "제목"
+        case priority = "우선순위"
+        
+        var keyPath: String {
+            switch self {
+            case .basic:
+                return ""
+            case .duedate:
+                return "dueDate"
+            case .title:
+                return "todoTitle"
+            case .priority:
+                return "priority"
+            }
+        }
+        
+        var ascending: Bool {
+            switch self {
+            case .basic, .duedate, .title:
+                return true
+            case .priority:
+                return false
+            }
+        }
     }
 }

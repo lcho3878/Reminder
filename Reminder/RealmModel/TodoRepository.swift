@@ -47,8 +47,4 @@ final class TodoRepository {
         }
     }
     
-    func filterList() {
-        
-    }
-    
 }
