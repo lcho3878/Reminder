@@ -47,4 +47,11 @@ final class TodoRepository {
         }
     }
     
+    func updateItem(from: Todo?, to: Todo) {
+        guard let from = from else { return }
+        try! realm.write {
+            from.copyProperties(other: to)
+        }
+    }
+    
 }

@@ -79,11 +79,7 @@ final class RegisterViewController: BaseViewController {
     
     private func configureTempData(_ tempData: Todo?) {
         if let tempData {
-            todo.todoTitle = tempData.todoTitle
-            todo.todoMemo = tempData.todoMemo
-            todo.dueDate = tempData.dueDate
-            todo.priority = tempData.priority
-            todo.tag = tempData.tag
+            todo.copyProperties(other: tempData)
         }
     }
     
@@ -201,9 +197,7 @@ extension RegisterViewController {
             TodoRepository.shared.creadItem(todo)
         }
         else {
-            try! realm.write {
-                tempData = todo.copy() as! Todo
-            }
+            TodoRepository.shared.updateItem(from: tempData, to: todo)
         }
         NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
         dismiss(animated: true)
