@@ -51,6 +51,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        NotificationCenter.default.addObserver(self, selector: #selector(todoUpdated), name: NSNotification.Name("todoUpdated"), object: nil)
     }
     
     override func configureView() {
@@ -124,3 +125,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
+extension HomeViewController {
+    @objc
+    private func todoUpdated() {
+        listCollectionView.reloadData()
+    }
+}

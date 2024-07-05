@@ -88,10 +88,10 @@
 				5421BD372C34244500664E32 /* RealmModel */,
 				5421BD292C3412B200664E32 /* CustomView */,
 				5491951D2C35676800C28B31 /* HomeView */,
+				5421BD3C2C3431B600664E32 /* TodoView */,
 				5421BD302C341FAF00664E32 /* RegisterView */,
 				5421BD192C340BEE00664E32 /* Assets.xcassets */,
 				5421BD1E2C340BEE00664E32 /* Info.plist */,
-				5421BD3C2C3431B600664E32 /* TodoView */,
 			);
 			path = Reminder;
 			sourceTree = "<group>";

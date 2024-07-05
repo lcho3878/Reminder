@@ -209,6 +209,7 @@ extension RegisterViewController {
                 tempData?.tag = todo.tag
             }
         }
+        NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
         dismiss(animated: true)
     }
     

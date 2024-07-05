@@ -57,6 +57,7 @@ final class TodoViewController: BaseViewController {
         super.viewDidLoad()
         configureTableView()
         list = TodoRepository.shared.readItems(with: with)
+        NotificationCenter.default.addObserver(self, selector: #selector(todoUpdated), name: NSNotification.Name("todoUpdated"), object: nil)
         print(realm.configuration.fileURL)
     }
     
@@ -119,10 +120,18 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
             try! self.realm.write{
                 self.realm.delete(data)
             }
+            NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
             self.todoTableView.reloadData()
         }
         let action = UISwipeActionsConfiguration(actions: [delete])
         return action
     }
     
+}
+
+extension TodoViewController {
+    @objc
+    private func todoUpdated() {
+        todoTableView.reloadData()
+    }
 }
