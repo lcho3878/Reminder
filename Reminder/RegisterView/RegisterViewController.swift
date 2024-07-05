@@ -168,8 +168,8 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
         let menuType = MenuList.allCases[indexPath.row]
         switch menuType {
         case .date:
-            let calVC = CalendarViewController()
-            navigationController?.pushViewController(calVC, animated: true)
+            let dateVC = DateViewController()
+            navigationController?.pushViewController(dateVC, animated: true)
         case .tag:
             let tagVC = TagViewController()
             let tagNav = UINavigationController(rootViewController: tagVC)

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class CalendarViewController: BaseViewController {
+final class DateViewController: BaseViewController {
     
     private lazy var datePicker = {
         let view = UIDatePicker()
@@ -45,7 +45,7 @@ final class CalendarViewController: BaseViewController {
     
 }
 
-extension CalendarViewController {
+extension DateViewController {
     @objc
     private func datePickerValueChanged(_ sender: UIDatePicker) {
         print(sender.date)

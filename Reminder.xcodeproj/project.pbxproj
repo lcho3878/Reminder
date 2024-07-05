@@ -21,7 +21,7 @@
 		5421BD392C34247400664E32 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD382C34247400664E32 /* Todo.swift */; };
 		5421BD3B2C342E6F00664E32 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD3A2C342E6F00664E32 /* TodoViewController.swift */; };
 		5421BD3E2C3431DF00664E32 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */; };
-		5491951A2C35351A00C28B31 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195192C35351A00C28B31 /* CalendarViewController.swift */; };
+		5491951A2C35351A00C28B31 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195192C35351A00C28B31 /* DateViewController.swift */; };
 		5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491951B2C353CCC00C28B31 /* TagViewController.swift */; };
 		5491951F2C35677700C28B31 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491951E2C35677700C28B31 /* ListCollectionViewCell.swift */; };
 		549195222C3567D100C28B31 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195212C3567D100C28B31 /* Reusable.swift */; };
@@ -42,7 +42,7 @@
 		5421BD382C34247400664E32 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		5421BD3A2C342E6F00664E32 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
-		549195192C35351A00C28B31 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		549195192C35351A00C28B31 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		5491951B2C353CCC00C28B31 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		5491951E2C35677700C28B31 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		549195212C3567D100C28B31 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			children = (
 				5421BD2A2C3412D600664E32 /* RegisterViewController.swift */,
 				5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */,
-				549195192C35351A00C28B31 /* CalendarViewController.swift */,
+				549195192C35351A00C28B31 /* DateViewController.swift */,
 				5491951B2C353CCC00C28B31 /* TagViewController.swift */,
 			);
 			path = RegisterView;
@@ -238,7 +238,7 @@
 				5421BD152C340BED00664E32 /* HomeViewController.swift in Sources */,
 				5421BD3B2C342E6F00664E32 /* TodoViewController.swift in Sources */,
 				5421BD2B2C3412D600664E32 /* RegisterViewController.swift in Sources */,
-				5491951A2C35351A00C28B31 /* CalendarViewController.swift in Sources */,
+				5491951A2C35351A00C28B31 /* DateViewController.swift in Sources */,
 				5421BD3E2C3431DF00664E32 /* TodoTableViewCell.swift in Sources */,
 				5421BD252C340C7B00664E32 /* BaseViewController.swift in Sources */,
 				549195222C3567D100C28B31 /* Reusable.swift in Sources */,

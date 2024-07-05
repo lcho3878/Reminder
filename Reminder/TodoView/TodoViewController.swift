@@ -57,6 +57,7 @@ final class TodoViewController: BaseViewController {
         super.viewDidLoad()
         configureTableView()
         list = realm.objects(Todo.self)
+        print(realm.configuration.fileURL)
     }
     
     override func configureView() {
@@ -106,7 +107,7 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = list[indexPath.row]
         let registerVC = RegisterViewController()
-        registerVC.todo = data
+        registerVC.tempData = data
         registerVC.viewType = .modify
         let registerNav = UINavigationController(rootViewController: registerVC)
         present(registerNav, animated: true)
