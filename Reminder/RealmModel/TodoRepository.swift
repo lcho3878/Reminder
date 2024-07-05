@@ -42,9 +42,9 @@ final class TodoRepository {
         case .all:
             return realm.objects(Todo.self)
         case .flag:
-            return realm.objects(Todo.self)
+            return realm.objects(Todo.self).where { $0.isFlag == true }
         case .complete:
-            return realm.objects(Todo.self)
+            return realm.objects(Todo.self).where { $0.isComplete == true }
         }
     }
     
