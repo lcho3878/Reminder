@@ -43,9 +43,9 @@ final class TodoViewController: BaseViewController {
         return view
     }()
     
-    private let categoryLabel = {
+    private lazy var categoryLabel = {
         let view = UILabel()
-        view.text = "전체"
+        view.text = with.rawValue
         view.textColor = .systemBlue
         view.font = .boldSystemFont(ofSize: 40)
         return view
