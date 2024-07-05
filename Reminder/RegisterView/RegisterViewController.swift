@@ -102,7 +102,7 @@ final class RegisterViewController: BaseViewController {
     
     override func configureView() {
         super.configureView()
-        title = "새로운 할 일"
+        title = viewType.navigationTitle
         navigationItem.leftBarButtonItem = dismissButton
         navigationItem.rightBarButtonItem = rightBarButton
     }
@@ -225,5 +225,14 @@ extension RegisterViewController {
     enum ViewType: String {
         case register = "추가"
         case modify = "수정"
+        
+        var navigationTitle: String {
+            switch self {
+            case .register:
+                return "새로운 할 일"
+            case .modify:
+                return "세부사항"
+            }
+        }
     }
 }
