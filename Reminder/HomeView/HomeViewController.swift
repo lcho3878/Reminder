@@ -111,13 +111,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
-        let data = Todo.HomeMenuList.allCases[indexPath.row]
+        let data = Todo.HomeMenuList.allCases[indexPath.item]
         cell.configureData(data)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let todoVC = TodoViewController()
+        todoVC.with = Todo.HomeMenuList.allCases[indexPath.item]
         navigationController?.pushViewController(todoVC, animated: true)
     }
     

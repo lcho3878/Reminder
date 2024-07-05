@@ -13,12 +13,12 @@ final class TodoViewController: BaseViewController {
     
     private let realm = try! Realm()
     
-    private var list: Results<Todo>!
+    var with: Todo.HomeMenuList!
+    
+    var list: Results<Todo>!
     
     private func filterling(title: String) {
         switch title {
-        case "기본": list = realm.objects(Todo.self)
-        case "마감일": list = realm.objects(Todo.self).sorted(byKeyPath: "todoTitle", ascending: true)
         default:
             break
         }
@@ -56,7 +56,7 @@ final class TodoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        list = realm.objects(Todo.self)
+        list = TodoRepository.shared.readItems(with: with)
         print(realm.configuration.fileURL)
     }
     

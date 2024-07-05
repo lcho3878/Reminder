@@ -198,9 +198,7 @@ extension RegisterViewController {
         todo.todoTitle = title
         todo.todoMemo = memo
         if viewType == .register {
-            try! realm.write {
-                realm.add(todo)
-            }
+            TodoRepository.shared.creadItem(todo)
         }
         else {
             try! realm.write {

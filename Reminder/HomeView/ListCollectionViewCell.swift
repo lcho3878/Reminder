@@ -89,6 +89,7 @@ final class ListCollectionViewCell: UICollectionViewCell, Reusable {
     
     func configureData(_ data: Todo.HomeMenuList) {
         listTitleLabel.text = data.rawValue
+        countLabel.text = String(TodoRepository.shared.readItems(with: data.self).count)
         iconImageView.image = data.iconImage?.withTintColor(.white, renderingMode: .alwaysOriginal)
         iconImageView.backgroundColor = data.iconBackgroundColor
     }
