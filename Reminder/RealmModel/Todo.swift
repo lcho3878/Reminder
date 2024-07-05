@@ -60,6 +60,8 @@ class Todo: Object {
     @Persisted var dueDate: Date?
     @Persisted var priority: Int
     @Persisted var tag: String?
+    @Persisted var isFlag: Bool
+    @Persisted var isComplete: Bool
     
     var priorityString: String {
         switch priority{
