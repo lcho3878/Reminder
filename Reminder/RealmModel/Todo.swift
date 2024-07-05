@@ -5,7 +5,7 @@
 //  Created by 이찬호 on 7/2/24.
 //
 
-import Foundation
+import UIKit
 import RealmSwift
 
 class Todo: Object {
@@ -14,6 +14,44 @@ class Todo: Object {
         case tag = "태그"
         case priority = "우선 순위"
         case image = "이미지 추가"
+    }
+    
+    enum HomeMenuList: String, CaseIterable {
+        case today = "오늘"
+        case expected = "예정"
+        case all = "전체"
+        case flag = "깃발 표시"
+        case complete = "완료됨"
+        
+        var iconImage: UIImage? {
+            switch self {
+            case .today:
+                return  UIImage(systemName: "calendar")
+            case .expected:
+                return UIImage(systemName: "calendar")
+            case .all:
+                return UIImage(systemName: "tray.fill")
+            case .flag:
+                return UIImage(systemName: "flag.fill")
+            case .complete:
+                return UIImage(systemName: "checkmark")
+            }
+        }
+        
+        var iconBackgroundColor: UIColor {
+            switch self {
+            case .today:
+                return .systemBlue
+            case .expected:
+                return .systemRed
+            case .all:
+                return .lightGray
+            case .flag:
+                return .systemYellow
+            case .complete:
+                return .gray
+            }
+        }
     }
     
     @Persisted(primaryKey: true) var id: ObjectId

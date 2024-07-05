@@ -24,7 +24,7 @@ final class ListCollectionViewCell: UICollectionViewCell, Reusable {
     
     private let iconImageView = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "calendar.circle.fill")
+        view.contentMode = .center
         return view
     }()
     
@@ -50,6 +50,11 @@ final class ListCollectionViewCell: UICollectionViewCell, Reusable {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
     }
     
     private func configureHierarchy() {
@@ -82,8 +87,10 @@ final class ListCollectionViewCell: UICollectionViewCell, Reusable {
         
     }
     
-    func configureData(_ data: Results<Todo>) {
-        countLabel.text = "\(data.count)"
+    func configureData(_ data: Todo.HomeMenuList) {
+        listTitleLabel.text = data.rawValue
+        iconImageView.image = data.iconImage?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        iconImageView.backgroundColor = data.iconBackgroundColor
     }
     
 }
