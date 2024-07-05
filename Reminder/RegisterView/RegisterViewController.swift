@@ -202,11 +202,7 @@ extension RegisterViewController {
         }
         else {
             try! realm.write {
-                tempData?.todoTitle = todo.todoTitle
-                tempData?.todoMemo = todo.todoMemo
-                tempData?.dueDate = todo.dueDate
-                tempData?.priority = todo.priority
-                tempData?.tag = todo.tag
+                tempData = todo.copy() as! Todo
             }
         }
         NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)

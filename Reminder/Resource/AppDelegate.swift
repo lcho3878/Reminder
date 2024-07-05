@@ -15,13 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let config = Realm.Configuration(schemaVersion: 2) { migration, oldSchemaVersion in
+        let config = Realm.Configuration(schemaVersion: 3) { migration, oldSchemaVersion in
             if oldSchemaVersion < 1 {
                 
             }
             
-            if oldSchemaVersion > 2 {
+            if oldSchemaVersion < 2 {
                 //isFlag, isComplete 추가
+            }
+            
+            if oldSchemaVersion < 3 {
+                //filename 추가
             }
             
         }

@@ -62,6 +62,7 @@ class Todo: Object {
     @Persisted var tag: String?
     @Persisted var isFlag: Bool
     @Persisted var isComplete: Bool
+    @Persisted var filename: String?
     
     var priorityString: String {
         switch priority{
@@ -104,8 +105,14 @@ class Todo: Object {
         self.tag = tag
     }
     
-    static func makeList() -> Results<Todo> {
-        let realm = try! Realm()
-        return realm.objects(Todo.self)
+    func copyProperties (other: Todo) {
+        self.todoTitle = other.todoTitle
+        self.todoMemo = other.todoMemo
+        self.dueDate = other.dueDate
+        self.priority = other.priority
+        self.tag = other.tag
+        self.isFlag = other.isFlag
+        self.isComplete = other.isComplete
+        self.filename = other.filename
     }
 }
