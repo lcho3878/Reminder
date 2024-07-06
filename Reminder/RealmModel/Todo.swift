@@ -64,6 +64,15 @@ class Todo: Object {
     @Persisted var isComplete: Bool
     var image: UIImage?
     
+    var titleString: NSAttributedString {
+        let bangs = String(repeating: "!", count: priority)
+        let spacing = priority == 0 ? "" : " "
+        let attributedString = NSMutableAttributedString(string: bangs + spacing + todoTitle)
+        let range = NSRange(location: 0, length: priority)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: range)
+        return attributedString
+    }
+    
     var tagString: String? {
         guard let tag else { return nil }
         return "#" + tag

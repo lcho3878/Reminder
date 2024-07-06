@@ -119,7 +119,7 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
     }
     
     func configureData(_ data: Todo) {
-        titleLabel.text = data.todoTitle
+        titleLabel.attributedText = data.titleString
         memoLabel.text = data.todoMemo
         dateLabel.text = data.dueDate?.formatted()
         tagLabel.text = data.tagString
