@@ -10,12 +10,15 @@ import SnapKit
 
 final class DateViewController: BaseViewController {
     
+    var storedDate: Date?
+    
     private lazy var datePicker = {
         let view = UIDatePicker()
         view.preferredDatePickerStyle = .inline
         view.locale = Locale(identifier: "ko-KR")
         view.timeZone = TimeZone(abbreviation: "GMT+9:00")
         view.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        view.date = storedDate ?? Date()
         return view
     }()
     

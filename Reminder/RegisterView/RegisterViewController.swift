@@ -167,9 +167,11 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
         switch menuType {
         case .date:
             let dateVC = DateViewController()
+            dateVC.storedDate = todo.dueDate
             navigationController?.pushViewController(dateVC, animated: true)
         case .tag:
             let tagVC = TagViewController()
+            tagVC.storedTag = todo.tag
             let tagNav = UINavigationController(rootViewController: tagVC)
             present(tagNav, animated: true)
         case .image:

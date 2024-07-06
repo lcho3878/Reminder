@@ -10,9 +10,12 @@ import SnapKit
 
 final class TagViewController: BaseViewController {
     
-    private let tagTextField = {
+    var storedTag: String?
+    
+    private lazy var tagTextField = {
         let view = UIPaddingTextField()
         view.insetX = 16
+        view.text = storedTag
         view.placeholder = "새로운 태그 추가..."
         view.backgroundColor = .systemGray5
         view.layer.cornerRadius = 8
