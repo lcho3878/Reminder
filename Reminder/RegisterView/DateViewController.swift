@@ -19,17 +19,24 @@ final class DateViewController: BaseViewController {
         return view
     }()
     
+    private lazy var dismissButton = {
+        let view = UIBarButtonItem(title: BarButtonType.dismiss.rawValue, style: .plain, target: self, action: #selector(dismissButtonClicked))
+        return view
+    }()
+    
+    private lazy var confirmButton = {
+        let view = UIBarButtonItem(title: BarButtonType.confirm.rawValue, style: .plain, target: self, action: #selector(confirmButtonClicked))
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["date": datePicker.date])
-    }
-    
     override func configureView() {
         super.configureView()
+        navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.rightBarButtonItem = confirmButton
     }
     
     override func configureHierarhy() {
@@ -46,9 +53,23 @@ final class DateViewController: BaseViewController {
 }
 
 extension DateViewController {
+    
     @objc
     private func datePickerValueChanged(_ sender: UIDatePicker) {
 
     }
+    
+    @objc
+    private func dismissButtonClicked() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func confirmButtonClicked() {
+        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["date": datePicker.date])
+        navigationController?.popViewController(animated: true)
+    }
+
 }
+
 

@@ -33,11 +33,6 @@ final class TagViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["tag": tagTextField.text!])
-//    }
-    
     override func configureView() {
         super.configureView()
         navigationItem.leftBarButtonItem = dismissButton
