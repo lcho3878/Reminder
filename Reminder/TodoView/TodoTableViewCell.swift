@@ -8,12 +8,23 @@
 import UIKit
 import SnapKit
 
+protocol TodoTableViewCellDelegate: AnyObject {
+    func updateData(_ index: Int)
+}
+
 final class TodoTableViewCell: UITableViewCell, Reusable {
     
     static var identifier: String {
         return String(describing: self)
     }
     
+    weak var delegate: TodoTableViewCellDelegate?
+    
+    private lazy var completeButton = {
+        let view = UIButton()
+        view.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
+        return view
+    }()
     
     private let titleLabel = {
         let view = UILabel()
@@ -49,6 +60,7 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
     }
     
     private func configureHierarchy() {
+        contentView.addSubview(completeButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(memoLabel)
         contentView.addSubview(dateLabel)
@@ -56,8 +68,15 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
     }
     
     private func configureLayout() {
+        
+        completeButton.snp.makeConstraints {
+            $0.leading.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
+            $0.width.equalTo(40)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.leading.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
+            $0.leading.equalTo(completeButton.snp.trailing).offset(8)
             $0.height.lessThanOrEqualTo(44)
         }
         
@@ -86,6 +105,14 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         memoLabel.text = data.todoMemo
         dateLabel.text = data.dueDate?.formatted()
         tagLabel.text = data.tag
+        completeButton.setImage(UIImage(systemName: data.isComplete ? "circle.fill" : "circle"), for: .normal)
     }
     
+}
+
+extension TodoTableViewCell {
+    @objc
+    private func completeButtonClicked() {
+        delegate?.updateData(tag)
+    }
 }

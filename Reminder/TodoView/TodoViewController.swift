@@ -98,6 +98,8 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.identifier, for: indexPath) as? TodoTableViewCell else { return UITableViewCell() }
         let data = list[indexPath.row]
+        cell.tag = indexPath.row
+        cell.delegate = self
         cell.configureData(data)
         return cell
     }
@@ -162,4 +164,16 @@ extension TodoViewController {
             }
         }
     }
+}
+
+extension TodoViewController: TodoTableViewCellDelegate {
+    
+    func updateData(_ index: Int) {
+        let data = list[index]
+        try! realm.write {
+            data.isComplete.toggle()
+            NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
+        }
+    }
+    
 }
