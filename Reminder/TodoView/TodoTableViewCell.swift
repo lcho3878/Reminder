@@ -26,6 +26,13 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         return view
     }()
     
+    private let horizontalStackView = {
+        let view = UIStackView()
+        view.distribution = .equalSpacing
+        view.spacing = 0
+        return view
+    }()
+    
     private let verticalStackView = {
         let view = UIStackView()
         view.distribution = .fillEqually
@@ -47,7 +54,7 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
     
     private let bottomStackView = {
         let view = UIStackView()
-        view.distribution = .fillProportionally
+        view.distribution = .fill
         view.spacing = 8
         return view
     }()
@@ -85,35 +92,42 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
     }
     
     private func configureHierarchy() {
-        contentView.addSubview(completeButton)
-        contentView.addSubview(verticalStackView)
+        contentView.addSubview(horizontalStackView)
+        horizontalStackView.addSubview(completeButton)
+        horizontalStackView.addSubview(verticalStackView)
+        horizontalStackView.addSubview(cellImageView)
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(memoLabel)
         verticalStackView.addArrangedSubview(bottomStackView)
         bottomStackView.addArrangedSubview(dateLabel)
         bottomStackView.addArrangedSubview(tagLabel)
-        contentView.addSubview(cellImageView)
+
     }
     
     private func configureLayout() {
+        
+        horizontalStackView.snp.makeConstraints {
+            $0.edges.equalTo(contentView.safeAreaLayoutGuide)
+        }
         
         completeButton.snp.makeConstraints {
             $0.leading.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
             $0.width.equalTo(40)
         }
         
-        verticalStackView.snp.makeConstraints {
-            $0.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
-            $0.leading.equalTo(completeButton.snp.trailing)
-        }
-        
         cellImageView.snp.makeConstraints {
             $0.leading.greaterThanOrEqualTo(verticalStackView.snp.trailing).offset(8)
             $0.trailing.equalToSuperview().inset(8)
-            $0.size.equalTo(50)
+            $0.height.lessThanOrEqualTo(50)
+            $0.width.equalTo(cellImageView.snp.height)
             $0.top.greaterThanOrEqualTo(contentView.safeAreaLayoutGuide).offset(8)
             $0.bottom.lessThanOrEqualTo(contentView.safeAreaLayoutGuide).inset(8)
             $0.centerY.equalTo(completeButton)
+        }
+        
+        verticalStackView.snp.makeConstraints {
+            $0.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+            $0.leading.equalTo(completeButton.snp.trailing)
         }
     
     }
