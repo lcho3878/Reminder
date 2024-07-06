@@ -64,6 +64,11 @@ class Todo: Object {
     @Persisted var isComplete: Bool
     var image: UIImage?
     
+    var tagString: String? {
+        guard let tag else { return nil }
+        return "#" + tag
+    }
+    
     var priorityString: String {
         switch priority{
         case 1: return ": 낮음"

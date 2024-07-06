@@ -25,3 +25,10 @@ class BaseViewController: UIViewController {
     func configureLayout() {}
     
 }
+
+extension BaseViewController {
+    enum BarButtonType: String {
+        case dismiss = "취소"
+        case confirm = "확인"
+    }
+}

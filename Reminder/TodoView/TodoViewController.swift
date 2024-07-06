@@ -55,7 +55,6 @@ final class TodoViewController: BaseViewController {
         configureTableView()
         list = TodoRepository.shared.readItems(with: with)
         NotificationCenter.default.addObserver(self, selector: #selector(todoUpdated), name: NSNotification.Name("todoUpdated"), object: nil)
-//        print(realm.configuration.fileURL)
     }
     
     override func configureView() {

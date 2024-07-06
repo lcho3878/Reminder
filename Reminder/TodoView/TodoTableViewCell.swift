@@ -122,7 +122,7 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         titleLabel.text = data.todoTitle
         memoLabel.text = data.todoMemo
         dateLabel.text = data.dueDate?.formatted()
-        tagLabel.text = data.tag
+        tagLabel.text = data.tagString
         completeButton.setImage(UIImage(systemName: data.isComplete ? "circle.fill" : "circle"), for: .normal)
         cellImageView.image = DataManager.shared.loadImageToDocument(filename: data.id.stringValue)
         configureHidden(data)

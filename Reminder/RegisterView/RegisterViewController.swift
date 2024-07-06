@@ -75,8 +75,6 @@ final class RegisterViewController: BaseViewController {
         configureTempData(tempData)
 
         NotificationCenter.default.addObserver(self, selector: #selector(todoReceived), name: NSNotification.Name("TodoReceived"), object: nil)
-        print("temp: \(tempData?.id)")
-        print("todo: \(todo.id)")
     }
     
     private func configureTempData(_ tempData: Todo?) {
@@ -93,7 +91,7 @@ final class RegisterViewController: BaseViewController {
             todo.dueDate = date
         }
         if let tag = notification.userInfo?["tag"] as? String {
-            todo.tag = tag
+            todo.tag = tag.isEmpty ? nil : tag
         }
         if let priority = notification.userInfo?["priority"] as? Int {
             todo.priority = priority

@@ -19,17 +19,29 @@ final class TagViewController: BaseViewController {
         return view
     }()
     
+    private lazy var dismissButton = {
+        let view = UIBarButtonItem(title: BarButtonType.dismiss.rawValue, style: .plain, target: self, action: #selector(dismissButtonClicked))
+        return view
+    }()
+    
+    private lazy var confirmButton = {
+        let view = UIBarButtonItem(title: BarButtonType.confirm.rawValue, style: .plain, target: self, action: #selector(confirmButtonClicked))
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["tag": tagTextField.text!])
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["tag": tagTextField.text!])
+//    }
     
     override func configureView() {
         super.configureView()
+        navigationItem.leftBarButtonItem = dismissButton
+        navigationItem.rightBarButtonItem = confirmButton
         title = "태그"
     }
     
@@ -45,4 +57,18 @@ final class TagViewController: BaseViewController {
         }
     }
     
+}
+
+extension TagViewController {
+    @objc
+    private func dismissButtonClicked() {
+        dismiss(animated: true)
+    }
+    
+    @objc
+    private func confirmButtonClicked() {
+        guard let tag = tagTextField.text else { return }
+        NotificationCenter.default.post(name: NSNotification.Name("TodoReceived"), object: nil, userInfo: ["tag": tag])
+        dismiss(animated: true)
+    }
 }
