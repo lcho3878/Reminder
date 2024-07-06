@@ -7,11 +7,11 @@
 
 import UIKit
 import SnapKit
+import PhotosUI
+
 import RealmSwift
 
 final class RegisterViewController: BaseViewController {
-    
-    private let realm = try! Realm()
     
     var viewType: ViewType!
     
@@ -75,12 +75,17 @@ final class RegisterViewController: BaseViewController {
         configureTempData(tempData)
 
         NotificationCenter.default.addObserver(self, selector: #selector(todoReceived), name: NSNotification.Name("TodoReceived"), object: nil)
+        print("temp: \(tempData?.id)")
+        print("todo: \(todo.id)")
     }
     
     private func configureTempData(_ tempData: Todo?) {
-        if let tempData {
+        guard let tempData else { return }
             todo.copyProperties(other: tempData)
+        if let image = DataManager.shared.loadImageToDocument(filename: tempData.id.stringValue) {
+            todo.image = image
         }
+        menuTableView.reloadData()
     }
     
     @objc func todoReceived(notification: NSNotification) {
@@ -155,8 +160,7 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath) as? MenuTableViewCell else { return UITableViewCell() }
         let menuType = MenuList.allCases[indexPath.row]
-        let data = todo.menuCellTitle(menuType: menuType)
-        cell.configureData(data, menuType: menuType)
+        cell.configureData(todo, menuType: menuType)
         return cell
     }
     
@@ -170,7 +174,15 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
             let tagVC = TagViewController()
             let tagNav = UINavigationController(rootViewController: tagVC)
             present(tagNav, animated: true)
-        case .priority, .image:
+        case .image:
+            var configuration = PHPickerConfiguration()
+            configuration.selectionLimit = 1
+            configuration.filter = .any(of: [.screenshots, .images])
+            
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            present(picker, animated: true)
+        case .priority:
             break
         }
     }
@@ -192,13 +204,17 @@ extension RegisterViewController {
         guard let title = titleTextField.text,
               let memo = contentTextView.text else { return }
         todo.todoTitle = title
-        todo.todoMemo = memo
+        todo.todoMemo = memo.isEmpty ? nil : memo
         if viewType == .register {
             TodoRepository.shared.creadItem(todo)
+            DataManager.shared.saveImageToDocument(image: todo.image, filename: todo.id.stringValue)
         }
         else {
+            guard let tempData else { return }
             TodoRepository.shared.updateItem(from: tempData, to: todo)
+            DataManager.shared.saveImageToDocument(image: tempData.image, filename: tempData.id.stringValue)
         }
+
         NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
         dismiss(animated: true)
     }
@@ -225,4 +241,21 @@ extension RegisterViewController {
             }
         }
     }
+}
+
+extension RegisterViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        guard let itemProvider = results.first?.itemProvider,
+              itemProvider.canLoadObject(ofClass: UIImage.self) else { return }
+        itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+            DispatchQueue.main.async {
+                self.todo.image = image as? UIImage
+                self.menuTableView.reloadData()
+            }
+         
+        }
+    }
+    
 }

@@ -26,6 +26,14 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         return view
     }()
     
+    private let verticalStackView = {
+        let view = UIStackView()
+        view.distribution = .fillEqually
+        view.spacing = 4
+        view.axis = .vertical
+        return view
+    }()
+    
     private let titleLabel = {
         let view = UILabel()
         return view
@@ -34,6 +42,13 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
     private let memoLabel = {
         let view = UILabel()
         view.textColor = .lightGray
+        return view
+    }()
+    
+    private let bottomStackView = {
+        let view = UIStackView()
+        view.distribution = .fillProportionally
+        view.spacing = 8
         return view
     }()
     
@@ -49,6 +64,12 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         return view
     }()
     
+    private let cellImageView = {
+        let view = UIImageView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureHierarchy()
@@ -59,12 +80,19 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
     private func configureHierarchy() {
         contentView.addSubview(completeButton)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(memoLabel)
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(tagLabel)
+        contentView.addSubview(verticalStackView)
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(memoLabel)
+        verticalStackView.addArrangedSubview(bottomStackView)
+        bottomStackView.addArrangedSubview(dateLabel)
+        bottomStackView.addArrangedSubview(tagLabel)
+        contentView.addSubview(cellImageView)
     }
     
     private func configureLayout() {
@@ -74,28 +102,18 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
             $0.width.equalTo(40)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
-            $0.leading.equalTo(completeButton.snp.trailing).offset(8)
-            $0.height.lessThanOrEqualTo(44)
+        verticalStackView.snp.makeConstraints {
+            $0.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(8)
+            $0.leading.equalTo(completeButton.snp.trailing)
         }
         
-        memoLabel.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel)
-            $0.height.lessThanOrEqualTo(44)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
-        }
-        
-        dateLabel.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel)
-            $0.height.lessThanOrEqualTo(44)
-            $0.top.equalTo(memoLabel.snp.bottom).offset(4)
-            $0.bottom.equalTo(contentView.safeAreaInsets).inset(4)
-        }
-        
-        tagLabel.snp.makeConstraints {
-            $0.leading.equalTo(dateLabel.snp.trailing).offset(8)
-            $0.height.verticalEdges.equalTo(dateLabel)
+        cellImageView.snp.makeConstraints {
+            $0.leading.greaterThanOrEqualTo(verticalStackView.snp.trailing).offset(8)
+            $0.trailing.equalToSuperview().inset(8)
+            $0.size.equalTo(50)
+            $0.top.greaterThanOrEqualTo(contentView.safeAreaLayoutGuide).offset(8)
+            $0.bottom.lessThanOrEqualTo(contentView.safeAreaLayoutGuide).inset(8)
+            $0.centerY.equalTo(completeButton)
         }
     
     }
@@ -106,8 +124,17 @@ final class TodoTableViewCell: UITableViewCell, Reusable {
         dateLabel.text = data.dueDate?.formatted()
         tagLabel.text = data.tag
         completeButton.setImage(UIImage(systemName: data.isComplete ? "circle.fill" : "circle"), for: .normal)
+        cellImageView.image = DataManager.shared.loadImageToDocument(filename: data.id.stringValue)
+        configureHidden(data)
     }
     
+    private func configureHidden(_ data: Todo) {
+        memoLabel.isHidden = data.todoMemo == nil
+        dateLabel.isHidden = data.dueDate == nil
+        tagLabel.isHidden = data.tag == nil
+        bottomStackView.isHidden = tagLabel.isHidden && dateLabel.isHidden
+        cellImageView.isHidden = cellImageView.image == nil
+    }
 }
 
 extension TodoTableViewCell {

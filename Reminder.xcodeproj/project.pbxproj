@@ -26,6 +26,7 @@
 		5491951F2C35677700C28B31 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491951E2C35677700C28B31 /* ListCollectionViewCell.swift */; };
 		549195222C3567D100C28B31 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195212C3567D100C28B31 /* Reusable.swift */; };
 		5491952A2C37C41500C28B31 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195292C37C41500C28B31 /* TodoRepository.swift */; };
+		5491952F2C3941AB00C28B31 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491952E2C3941AB00C28B31 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		5491951E2C35677700C28B31 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		549195212C3567D100C28B31 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		549195292C37C41500C28B31 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
+		5491952E2C3941AB00C28B31 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +84,7 @@
 		5421BD0F2C340BED00664E32 /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
-				5491952B2C37C6B800C28B31 /* Extension */,
+				5491952B2C37C6B800C28B31 /* Manager */,
 				5421BD362C34243100664E32 /* Resource */,
 				549195202C3567C300C28B31 /* Protocol */,
 				5421BD372C34244500664E32 /* RealmModel */,
@@ -161,11 +163,12 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		5491952B2C37C6B800C28B31 /* Extension */ = {
+		5491952B2C37C6B800C28B31 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				5491952E2C3941AB00C28B31 /* DataManager.swift */,
 			);
-			path = Extension;
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +260,7 @@
 				5421BD392C34247400664E32 /* Todo.swift in Sources */,
 				5491951F2C35677700C28B31 /* ListCollectionViewCell.swift in Sources */,
 				5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */,
+				5491952F2C3941AB00C28B31 /* DataManager.swift in Sources */,
 				5421BD112C340BED00664E32 /* AppDelegate.swift in Sources */,
 				5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */,
 				5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */,

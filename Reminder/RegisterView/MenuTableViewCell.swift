@@ -55,6 +55,11 @@ final class MenuTableViewCell: UITableViewCell, Reusable {
         return menuButton
     }()
     
+    let smallImageView = {
+        let view = UIImageView()
+        return view
+    }()
+    
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -72,6 +77,7 @@ final class MenuTableViewCell: UITableViewCell, Reusable {
         grayView.addSubview(menuLabel)
         grayView.addSubview(disclosureImageView)
         grayView.addSubview(menuButton)
+        grayView.addSubview(smallImageView)
     }
     
     private func configureLayout() {
@@ -91,15 +97,23 @@ final class MenuTableViewCell: UITableViewCell, Reusable {
             $0.trailing.equalTo(grayView).inset(12)
         }
         
+        smallImageView.snp.makeConstraints {
+            $0.verticalEdges.equalToSuperview().inset(8)
+            $0.width.equalTo(smallImageView.snp.height)
+            $0.trailing.equalTo(disclosureImageView.snp.leading)
+        }
+        
         menuButton.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
 
     
-    func configureData(_ title: String, menuType: Todo.MenuList) {
-        menuLabel.text = title
+    func configureData(_ data: Todo, menuType: Todo.MenuList) {
+        menuLabel.text = data.menuCellTitle(menuType: menuType)
         menuButton.isHidden = menuType != .priority
+        smallImageView.isHidden = menuType != .image
+        smallImageView.image = data.image
     }
     
     

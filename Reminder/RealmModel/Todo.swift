@@ -62,7 +62,7 @@ class Todo: Object {
     @Persisted var tag: String?
     @Persisted var isFlag: Bool
     @Persisted var isComplete: Bool
-    @Persisted var filename: String?
+    var image: UIImage?
     
     var priorityString: String {
         switch priority{
@@ -113,6 +113,6 @@ class Todo: Object {
         self.tag = other.tag
         self.isFlag = other.isFlag
         self.isComplete = other.isComplete
-        self.filename = other.filename
+        self.image = other.image
     }
 }
