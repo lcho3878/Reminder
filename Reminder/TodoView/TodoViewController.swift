@@ -11,7 +11,6 @@ import RealmSwift
 
 final class TodoViewController: BaseViewController {
     
-    private let realm = try! Realm()
     
     var with: Todo.HomeMenuList!
     
@@ -115,13 +114,20 @@ extension TodoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let data = list[indexPath.row]
         let delete = UIContextualAction(style: .destructive, title: "삭제") { _,_,_ in
-            try! self.realm.write{
-                self.realm.delete(data)
-            }
+            TodoRepository.shared.deleteItem(data: data)
             NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
             self.todoTableView.reloadData()
         }
-        let action = UISwipeActionsConfiguration(actions: [delete])
+        let flagUpdate = UIContextualAction(style: .normal, title: data.isFlag ? "깃발 해제" : "깃발 표시") { _, _, _ in
+            TodoRepository.shared.updateItem(data: data) { data in
+                data.isFlag.toggle()
+                NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
+                self.todoTableView.reloadData()
+            }
+
+
+        }
+        let action = UISwipeActionsConfiguration(actions: [delete, flagUpdate])
         return action
     }
     
@@ -169,8 +175,8 @@ extension TodoViewController: TodoTableViewCellDelegate {
     
     func updateData(_ index: Int) {
         let data = list[index]
-        try! realm.write {
-            data.isComplete.toggle()
+        TodoRepository.shared.updateItem(data: data) { todo in
+            todo.isComplete.toggle()
             NotificationCenter.default.post(name: NSNotification.Name("todoUpdated"), object: nil)
         }
     }

@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 import PhotosUI
 
-import RealmSwift
 
 final class RegisterViewController: BaseViewController {
     

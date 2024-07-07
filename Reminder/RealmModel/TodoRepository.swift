@@ -47,10 +47,23 @@ final class TodoRepository {
         }
     }
     
+    func updateItem(data: Todo, handler: @escaping ((Todo) -> Void)) {
+        try! realm.write {
+            handler(data)
+        }
+    }
+    
     func updateItem(from: Todo?, to: Todo) {
         guard let from = from else { return }
         try! realm.write {
             from.copyProperties(other: to)
+        }
+    }
+    
+    func deleteItem(data: Todo) {
+        DataManager.shared.removeImageFromDocument(filename: data.id.stringValue)
+        try! realm.write {
+            realm.delete(data)
         }
     }
     
