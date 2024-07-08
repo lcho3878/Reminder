@@ -22,6 +22,13 @@ final class TodoRepository {
         }
     }
     
+    func createFolder(_ name: String) {
+        let folder = Folder(name: name)
+        try! realm.write {
+            realm.add(folder)
+        }
+    }
+    
     func readItems(with: Todo.HomeMenuList) -> Results<Todo> {
         switch with {
             
@@ -45,6 +52,10 @@ final class TodoRepository {
         case .complete:
             return realm.objects(Todo.self).where { $0.isComplete == true }
         }
+    }
+    
+    func readFolders() -> Results<Folder> {
+        return realm.objects(Folder.self)
     }
     
     func updateItem(data: Todo, handler: @escaping ((Todo) -> Void)) {

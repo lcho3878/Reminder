@@ -40,11 +40,13 @@ final class HomeViewController: BaseViewController {
         return bt
     }()
     
-    private let newListButton = {
+    private lazy var newListButton = {
         var configuration = UIButton.Configuration.borderless()
         configuration.title = "목록 추가"
         configuration.baseForegroundColor = .systemBlue
-        let bt = UIButton(configuration: configuration)
+        let bt = UIButton(configuration: configuration, primaryAction: UIAction(handler: { _ in
+            self.newListButtonClicked()
+        }))
         return bt
     }()
     
@@ -95,6 +97,22 @@ extension HomeViewController {
         registerVC.viewType = .register
         let registerNav = UINavigationController(rootViewController: registerVC)
         present(registerNav, animated: true)
+    }
+    
+    private func newListButtonClicked() {
+        let alert = UIAlertController(title: "새로운 목록 이름", message: nil, preferredStyle: .alert)
+        alert.addTextField()
+        let ok = UIAlertAction(title: "확인", style: .default) { _ in
+            guard let name = alert.textFields?.first?.text, !name.isEmpty else { 
+                self.showAlert(title: nil, message: "공백은 불가능합니다.")
+                return
+            }
+            TodoRepository.shared.createFolder(name)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
 }
 

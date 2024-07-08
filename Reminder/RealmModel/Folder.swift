@@ -12,4 +12,9 @@ class Folder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String
     @Persisted var todos: List<Todo>
+    
+    convenience init(name: String) {
+        self.init()
+        self.name = name
+    }
 }
