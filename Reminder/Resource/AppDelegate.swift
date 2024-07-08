@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //isFlag, isComplete 추가
             }
             
+            if oldSchemaVersion < 3 {
+                //Folder class 추가 및 Todo 관계 설정 업데이트
+            }
+            
         }
         Realm.Configuration.defaultConfiguration = config
         return true

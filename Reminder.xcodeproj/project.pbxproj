@@ -27,6 +27,7 @@
 		549195222C3567D100C28B31 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195212C3567D100C28B31 /* Reusable.swift */; };
 		5491952A2C37C41500C28B31 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195292C37C41500C28B31 /* TodoRepository.swift */; };
 		5491952F2C3941AB00C28B31 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491952E2C3941AB00C28B31 /* DataManager.swift */; };
+		5491953F2C3BD4E400C28B31 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491953E2C3BD4E400C28B31 /* Folder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		549195212C3567D100C28B31 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		549195292C37C41500C28B31 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		5491952E2C3941AB00C28B31 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		5491953E2C3BD4E400C28B31 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				5421BD382C34247400664E32 /* Todo.swift */,
+				5491953E2C3BD4E400C28B31 /* Folder.swift */,
 				549195292C37C41500C28B31 /* TodoRepository.swift */,
 			);
 			path = RealmModel;
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5421BD152C340BED00664E32 /* HomeViewController.swift in Sources */,
+				5491953F2C3BD4E400C28B31 /* Folder.swift in Sources */,
 				5421BD3B2C342E6F00664E32 /* TodoViewController.swift in Sources */,
 				5421BD2B2C3412D600664E32 /* RegisterViewController.swift in Sources */,
 				5491951A2C35351A00C28B31 /* DateViewController.swift in Sources */,
