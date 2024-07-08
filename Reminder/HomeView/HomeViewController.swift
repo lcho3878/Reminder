@@ -10,6 +10,8 @@ import SnapKit
 
 final class HomeViewController: BaseViewController {
     
+    private var folders = TodoRepository.shared.readFolders()
+    
     private let searchBar = {
         let view = UISearchBar()
         view.searchBarStyle = .minimal
@@ -25,6 +27,11 @@ final class HomeViewController: BaseViewController {
         let width = (UIScreen.main.bounds.width - ((n + 1) * spacing)) / n
         layout.itemSize = CGSize(width: width , height: 80)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return view
+    }()
+    
+    private let listTableView = {
+        let view = UITableView()
         return view
     }()
     
@@ -53,6 +60,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureTableView()
         NotificationCenter.default.addObserver(self, selector: #selector(todoUpdated), name: NSNotification.Name("todoUpdated"), object: nil)
     }
     
@@ -64,6 +72,7 @@ final class HomeViewController: BaseViewController {
     override func configureHierarhy() {
         view.addSubview(searchBar)
         view.addSubview(listCollectionView)
+        view.addSubview(listTableView)
         view.addSubview(newTaskButton)
         view.addSubview(newListButton)
     }
@@ -84,6 +93,12 @@ final class HomeViewController: BaseViewController {
         
         listCollectionView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom).offset(8)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(UIScreen.main.bounds.height / 3)
+        }
+        
+        listTableView.snp.makeConstraints {
+            $0.top.equalTo(listCollectionView.snp.bottom).offset(8)
             $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(newTaskButton.snp.top).offset(8)
         }
@@ -108,6 +123,7 @@ extension HomeViewController {
                 return
             }
             TodoRepository.shared.createFolder(name)
+            self.listTableView.reloadData()
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(ok)
@@ -139,6 +155,28 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let todoVC = TodoViewController()
         todoVC.with = Todo.HomeMenuList.allCases[indexPath.item]
         navigationController?.pushViewController(todoVC, animated: true)
+    }
+    
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+
+    private func configureTableView() {
+        listTableView.dataSource = self
+        listTableView.delegate = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return folders.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        let data = folders[indexPath.row]
+        cell.backgroundColor = .systemGray5
+        cell.textLabel?.text = data.name
+        cell.detailTextLabel?.text = "\(data.todos.count)"
+        return cell
     }
     
 }
