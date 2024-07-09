@@ -14,6 +14,8 @@ final class RegisterViewController: BaseViewController {
     
     var viewType: ViewType!
     
+    var storedFolder: Folder?
+    
     let todo = Todo(todoTitle: "", todoMemo: nil, dueDate: nil, priority: 0, tag: nil)
     
     var tempData: Todo?
@@ -94,6 +96,9 @@ final class RegisterViewController: BaseViewController {
         }
         if let priority = notification.userInfo?["priority"] as? Int {
             todo.priority = priority
+        }
+        if let folder = notification.userInfo?["folder"] as? Folder {
+            storedFolder = folder
         }
         menuTableView.reloadData()
     }
@@ -183,6 +188,11 @@ extension RegisterViewController: UITableViewDelegate, UITableViewDataSource {
             present(picker, animated: true)
         case .priority:
             break
+        case .folder:
+            let folderSelectVc = FolderSelectViewController()
+            folderSelectVc.storedFolder = todo.folder.first
+            navigationController?.pushViewController(folderSelectVc, animated: true)
+            break
         }
     }
 
@@ -205,7 +215,7 @@ extension RegisterViewController {
         todo.todoTitle = title
         todo.todoMemo = memo.isEmpty ? nil : memo
         if viewType == .register {
-            TodoRepository.shared.creadItem(todo)
+            TodoRepository.shared.creadItem(todo, folder: storedFolder)
             DataManager.shared.saveImageToDocument(image: todo.image, filename: todo.id.stringValue)
         }
         else {

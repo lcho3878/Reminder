@@ -14,6 +14,7 @@ class Todo: Object {
         case tag = "태그"
         case priority = "우선 순위"
         case image = "이미지 추가"
+        case folder = "목록 선택"
     }
     
     enum HomeMenuList: String, CaseIterable {
@@ -110,6 +111,8 @@ class Todo: Object {
             return menuType.rawValue + priorityString
         case .image:
             return menuType.rawValue
+        case .folder:
+            return menuType.rawValue
         }
     }
     
@@ -131,5 +134,6 @@ class Todo: Object {
         self.isFlag = other.isFlag
         self.isComplete = other.isComplete
         self.image = other.image
+//        self.folder = other.folder
     }
 }

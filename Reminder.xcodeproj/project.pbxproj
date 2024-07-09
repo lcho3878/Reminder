@@ -28,6 +28,7 @@
 		5491952A2C37C41500C28B31 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195292C37C41500C28B31 /* TodoRepository.swift */; };
 		5491952F2C3941AB00C28B31 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491952E2C3941AB00C28B31 /* DataManager.swift */; };
 		5491953F2C3BD4E400C28B31 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491953E2C3BD4E400C28B31 /* Folder.swift */; };
+		549195432C3BE58500C28B31 /* FolderSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195422C3BE58500C28B31 /* FolderSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		549195292C37C41500C28B31 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		5491952E2C3941AB00C28B31 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5491953E2C3BD4E400C28B31 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		549195422C3BE58500C28B31 /* FolderSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */,
 				549195192C35351A00C28B31 /* DateViewController.swift */,
 				5491951B2C353CCC00C28B31 /* TagViewController.swift */,
+				549195422C3BE58500C28B31 /* FolderSelectViewController.swift */,
 			);
 			path = RegisterView;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				5421BD112C340BED00664E32 /* AppDelegate.swift in Sources */,
 				5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */,
 				5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */,
+				549195432C3BE58500C28B31 /* FolderSelectViewController.swift in Sources */,
 				5421BD132C340BED00664E32 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

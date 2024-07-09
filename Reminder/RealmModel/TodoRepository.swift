@@ -16,9 +16,14 @@ final class TodoRepository {
     
     private init() {}
     
-    func creadItem(_ data: Todo) {
+    func creadItem(_ data: Todo, folder: Folder?) {
         try! realm.write {
-            realm.add(data)
+            if let folder = folder {
+                folder.todos.append(data)
+            }
+            else {
+                realm.add(data)
+            }
         }
     }
     

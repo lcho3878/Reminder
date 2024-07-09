@@ -171,7 +171,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "ListTalbeViewCell")
         let data = folders[indexPath.row]
         cell.backgroundColor = .systemGray5
         cell.textLabel?.text = data.name
