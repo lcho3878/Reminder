@@ -21,6 +21,8 @@
 		5421BD392C34247400664E32 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD382C34247400664E32 /* Todo.swift */; };
 		5421BD3B2C342E6F00664E32 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD3A2C342E6F00664E32 /* TodoViewController.swift */; };
 		5421BD3E2C3431DF00664E32 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */; };
+		546238682C3D56B40002D658 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546238672C3D56B40002D658 /* DateViewModel.swift */; };
+		5462386B2C3D56D20002D658 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462386A2C3D56D20002D658 /* Observable.swift */; };
 		5491951A2C35351A00C28B31 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549195192C35351A00C28B31 /* DateViewController.swift */; };
 		5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491951B2C353CCC00C28B31 /* TagViewController.swift */; };
 		5491951F2C35677700C28B31 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5491951E2C35677700C28B31 /* ListCollectionViewCell.swift */; };
@@ -46,6 +48,8 @@
 		5421BD382C34247400664E32 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		5421BD3A2C342E6F00664E32 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		546238672C3D56B40002D658 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
+		5462386A2C3D56D20002D658 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		549195192C35351A00C28B31 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		5491951B2C353CCC00C28B31 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		5491951E2C35677700C28B31 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 		5421BD0F2C340BED00664E32 /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
+				546238692C3D56C90002D658 /* Observable */,
 				5491952B2C37C6B800C28B31 /* Manager */,
 				5421BD362C34243100664E32 /* Resource */,
 				549195202C3567C300C28B31 /* Protocol */,
@@ -116,7 +121,7 @@
 			children = (
 				5421BD2A2C3412D600664E32 /* RegisterViewController.swift */,
 				5421BD312C341FBD00664E32 /* MenuTableViewCell.swift */,
-				549195192C35351A00C28B31 /* DateViewController.swift */,
+				546238662C3D56AA0002D658 /* DateView */,
 				5491951B2C353CCC00C28B31 /* TagViewController.swift */,
 				549195422C3BE58500C28B31 /* FolderSelectViewController.swift */,
 			);
@@ -150,6 +155,23 @@
 				5421BD3D2C3431DF00664E32 /* TodoTableViewCell.swift */,
 			);
 			path = TodoView;
+			sourceTree = "<group>";
+		};
+		546238662C3D56AA0002D658 /* DateView */ = {
+			isa = PBXGroup;
+			children = (
+				549195192C35351A00C28B31 /* DateViewController.swift */,
+				546238672C3D56B40002D658 /* DateViewModel.swift */,
+			);
+			path = DateView;
+			sourceTree = "<group>";
+		};
+		546238692C3D56C90002D658 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				5462386A2C3D56D20002D658 /* Observable.swift */,
+			);
+			path = Observable;
 			sourceTree = "<group>";
 		};
 		5491951D2C35676800C28B31 /* HomeView */ = {
@@ -266,10 +288,12 @@
 				549195222C3567D100C28B31 /* Reusable.swift in Sources */,
 				5421BD392C34247400664E32 /* Todo.swift in Sources */,
 				5491951F2C35677700C28B31 /* ListCollectionViewCell.swift in Sources */,
+				546238682C3D56B40002D658 /* DateViewModel.swift in Sources */,
 				5421BD2D2C341A8800664E32 /* UIPaddingTextField.swift in Sources */,
 				5491952F2C3941AB00C28B31 /* DataManager.swift in Sources */,
 				5421BD112C340BED00664E32 /* AppDelegate.swift in Sources */,
 				5491951C2C353CCC00C28B31 /* TagViewController.swift in Sources */,
+				5462386B2C3D56D20002D658 /* Observable.swift in Sources */,
 				5421BD322C341FBD00664E32 /* MenuTableViewCell.swift in Sources */,
 				549195432C3BE58500C28B31 /* FolderSelectViewController.swift in Sources */,
 				5421BD132C340BED00664E32 /* SceneDelegate.swift in Sources */,

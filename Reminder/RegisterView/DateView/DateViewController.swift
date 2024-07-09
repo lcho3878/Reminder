@@ -22,6 +22,13 @@ final class DateViewController: BaseViewController {
         return view
     }()
     
+    private lazy var dateLabel = {
+        let view = UILabel()
+        view.textAlignment = .center
+        view.text = storedDate?.formatted()
+        return view
+    }()
+    
     private lazy var dismissButton = {
         let view = UIBarButtonItem(title: BarButtonType.dismiss.rawValue, style: .plain, target: self, action: #selector(dismissButtonClicked))
         return view
@@ -44,12 +51,18 @@ final class DateViewController: BaseViewController {
     
     override func configureHierarhy() {
         view.addSubview(datePicker)
+        view.addSubview(dateLabel)
     }
     
     override func configureLayout() {
         datePicker.snp.makeConstraints{
             $0.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(400)
+        }
+        
+        dateLabel.snp.makeConstraints {
+            $0.top.equalTo(datePicker.snp.bottom).offset(24)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
