@@ -12,6 +12,8 @@ final class DateViewController: BaseViewController {
     
     var storedDate: Date?
     
+    private let viewModel = DateViewModel()
+    
     private lazy var datePicker = {
         let view = UIDatePicker()
         view.preferredDatePickerStyle = .inline
@@ -41,6 +43,14 @@ final class DateViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindData()
+    }
+    
+    private func bindData() {
+        viewModel.outputDate.bind {
+            self.dateLabel.text = $0
+        }
+        datePickerValueChanged(datePicker)
     }
     
     override func configureView() {
@@ -72,7 +82,7 @@ extension DateViewController {
     
     @objc
     private func datePickerValueChanged(_ sender: UIDatePicker) {
-
+        viewModel.inputDate.value = sender.date
     }
     
     @objc
